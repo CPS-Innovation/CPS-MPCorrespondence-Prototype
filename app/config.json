@@ -1,5 +1,5 @@
 {
-  "serviceName": "Service name goes here",
+  "serviceName": "Manage MP correspondence",
   "useServiceNavigation": true,
   "plugins": {
     "govuk-frontend": {
