@@ -1,0 +1,121 @@
+{% extends "layouts/main.html" %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+
+
+{% block pageTitle %}
+  Add basic details - {{ serviceName }}
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        CMS details
+      </h1>
+
+      <form class="form" action="/create-new-record/add-mp-details" method="post">
+
+        <h2 class="govuk-heading-m">What is the case type?</h2>
+{{ govukSelect({
+  fieldset: {
+    legend: {
+      text: "What is the case type?",
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  id: "which-case-type",
+  name: "which-case-type",
+  items: [
+  {
+    value: "choose",
+    text: "Choose case type",
+    selected: true
+  },
+    {
+      text: "Crown Court",
+      value: "case-type-crown-court"
+    },
+    {
+      text: "Magistrates Court",
+      value: "case-type-mags-court"
+    },
+    {
+      text: "Rape and Serious Sexual Offences (RASSO)",
+      value: "case-type-rasso"
+    },
+    {
+      text: "Central Casework (CCU)",
+      value: "case-type-ccu"
+    },
+    {
+      text: "Serious fraud (SFD)",
+      value: "case-type-sfd"
+    },
+    {
+      text: "SCCTD",
+      value: "case-type-ssctd"
+    },
+    {
+      text: "IJOC",
+      value: "case-type-ijoc"
+    },
+    {
+      text: "Proceeds of crime (POCA)",
+      value: "case-type-poca"
+    }
+
+  ]
+}) }} 
+
+{{ govukInput({
+  name: "record-urn",
+  id: "record-urn",
+  label: {
+    text: "URN",
+    classes: "govuk-label--m",
+    isPageHeading: false
+  },
+  hint: {
+    text: "For example, 12AB4567891, 12AB4567892/1 or 12345678903/M2"
+  }
+}) }}
+
+{{ govukCheckboxes({
+  name: "isVRR",
+  fieldset: {
+    legend: {
+      text: "Does this case engage VRR (Victim's right to review)?",
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    }
+  ]
+}) }}
+
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

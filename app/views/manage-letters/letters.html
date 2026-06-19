@@ -1,0 +1,100 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Letters
+      </h1>
+
+      <form class="form" action="/path/of/next/page" method="post">
+
+        {{ govukSummaryList({
+          card: {
+            title: {
+              text: "Letter of 1 May 2026"
+            }
+          },
+          rows: [
+            {
+              key: {
+                text: "Date letter received"
+              },
+              value: {
+                text: "20 May 2026"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "#",
+                    text: "Change",
+                    visuallyHiddenText: "age"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Date acknowledgement sent"
+              },
+              value: {
+                html: "21 May 2026"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "#",
+                    text: "Change",
+                    visuallyHiddenText: "nationality"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Draft due"
+              },
+              value: {
+                html: "19 May 2026 <span class='govuk-tag govuk-tag--red'>Overdue</span>"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "change-draft-due-date",
+                    text: "Change due date"
+                  },
+                  {
+                    href: "confirm-draft",
+                    text: "Confirm draft submitted",
+                    visuallyHiddenText: ""
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
+        
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

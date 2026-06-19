@@ -4,3 +4,35 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 #}
 
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
+
+{% block header %}
+  <header>
+    <div class="govuk-header">
+      <div class="govuk-header__container govuk-width-container">
+        <div class="govuk-header__logo">
+          <a href="#" class="govuk-header__homepage-link">
+            <div class="govuk-header__logotype govuk-!-font-weight-bold">
+            CPS
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}
+
+{% block scripts %}
+
+  {{ super() }}
+
+  <script src="/public/javascripts/accessible-autocomplete.min.js"></script>
+
+{% endblock %}
+
+{% block stylesheets %}
+
+  {{ super() }}
+
+  <link href="/public/css/accessible-autocomplete.min.css" rel="stylesheet" type="text/css" />
+
+{% endblock %}

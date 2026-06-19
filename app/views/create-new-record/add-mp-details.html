@@ -1,0 +1,50 @@
+{% extends "layouts/main.html" %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+
+
+{% block pageTitle %}
+  Add basic details - {{ serviceName }}
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <form class="form" action="/create-new-record/confirm-mp" method="post">
+
+
+      
+      <h1 class="govuk-heading-l">
+        <label for="choose-mp">Who is the representative that sent the letter?</label>
+      </h1>
+
+      <div>
+      <select class="govuk-select" name="choose-mp" id="choose-mp">
+        <option></option>
+        <option value = "mp:keir-starmer">Keir Starmer (Labour)</option>
+        <option value = "mp:kemi-badenoch">Kemi Badenoch (Conservative)</option>
+        <option value = "mp:ed-davey">Ed Davey (Liberal Democrat)</option>
+        <option value = "mp:nigel-farage">Nigel Farage (Reform UK)</option>
+        <option value = "mp:sian-berry">Siân Berry (Green)</option>
+      </select>
+      </div>
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

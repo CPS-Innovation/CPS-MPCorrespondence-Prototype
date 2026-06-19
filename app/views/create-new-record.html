@@ -1,0 +1,31 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Create new – {{ serviceName }} [Prototype]
+{% endblock %}
+
+
+{% block containerStart %}
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">
+        Create a new set of MP correspondence
+      </h1>
+
+      {{ govukButton({
+        text: "Start now",
+        href: "create-new-record/basic",
+        isStartButton: true
+      }) }}
+
+    </div>
+
+  </div>
+
+{% endblock %}

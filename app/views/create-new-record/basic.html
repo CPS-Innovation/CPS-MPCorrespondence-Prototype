@@ -1,0 +1,150 @@
+{% extends "layouts/main.html" %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+
+
+{% block pageTitle %}
+  Add basic details - {{ serviceName }}
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Basic details
+      </h1>
+
+      <form class="form" action="/create-new-record/basic-answer" method="post">
+
+        <h2 class="govuk-heading-m">Which CPS Area is responsible?</h2>
+{{ govukSelect({
+  fieldset: {
+    legend: {
+      text: "Which CPS area is responsible?",
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  id: "which-cps-area",
+  name: "which-cps-area",
+  items: [
+  {
+    value: "choose",
+    text: "Choose area",
+    selected: true
+  },
+    {
+      text: "HQ DID",
+      value: "did"
+    },
+    {
+      text: "West Midlands",
+      value: "wm"
+    },
+    {
+      text: "Yorkshire and Humber",
+      value: "yorks"
+    }
+  ]
+}) }} 
+
+{{ govukCheckboxes({
+  name: "isNational",
+  fieldset: {
+    legend: {
+      text: "Is this a national case?",
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  hint: {
+    text: "A 'national case' is one which needs to be answered by a national leader (e.g. Director General or DPP) or impacts across multiple areas"
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    }
+  ]
+}) }}
+
+{{ govukCheckboxes({
+  name: "isCMS",
+  fieldset: {
+    legend: {
+      text: "Is this case on CMS?",
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    }
+  ]
+}) }}
+
+{{ govukCheckboxes({
+  name: "isCivilClaim",
+  fieldset: {
+    legend: {
+      text: "Is this a civil claim?",
+      isPageHeading: false,
+      classes: "govuk-fieldset__legend--m"
+    }
+  },
+  items: [
+    {
+      value: "yes",
+      text: "Yes"
+    }
+  ]
+}) }}
+
+{{ govukTextarea({
+  name: "record-note",
+  id: "record-note",
+  label: {
+    text: "Note",
+    classes: "govuk-label--m",
+    isPageHeading: false
+  },
+  hint: {
+    text: "Do not include personal, financial or sensitive information for data protection reasons"
+  }
+}) }}
+
+{{ govukInput({
+  name: "record-topic",
+  id: "record-topic",
+  label: {
+    text: "Topic",
+    classes: "govuk-label--m",
+    isPageHeading: false
+  },
+  hint: {
+    text: "Do not include personal, financial or sensitive information for data protection reasons"
+  }
+}) }}
+
+
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

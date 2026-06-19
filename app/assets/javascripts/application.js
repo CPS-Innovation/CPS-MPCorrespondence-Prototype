@@ -5,4 +5,17 @@
 
 window.GOVUKPrototypeKit.documentReady(() => {
   // Add JavaScript here
+
+  // Autocomplete select
+
+  let selectElement = document.querySelector('#choose-mp')
+ 
+  accessibleAutocomplete.enhanceSelectElement({
+
+    defaultValue: '',
+
+    selectElement: selectElement
+
+  })
+
 })
