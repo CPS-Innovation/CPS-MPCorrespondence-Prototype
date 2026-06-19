@@ -1,9 +1,12 @@
 {% extends "layouts/main.html" %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 
+{% set selected = mps[data.selected-mp] %}
+
+
 
 {% block pageTitle %}
-  Add basic details - {{ serviceName }}
+Create new record - {{ serviceName }}
 {% endblock %}
 
 {% block containerStart %}
@@ -15,6 +18,8 @@
 
 {% block content %}
 
+{{ data[choose-mp] | dump }}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
@@ -23,6 +28,7 @@
         Confirm the representative's details are correct
       </h1>
 
+
       {{ govukSummaryList({
         rows: [
           {
@@ -30,7 +36,7 @@
               text: "Name"
             },
             value: {
-              text: "Keir Starmer"
+              text: ""
             }
           },
           {
@@ -38,7 +44,7 @@
               text: "Party affiliation"
             },
             value: {
-              text: "Labour"
+              text: selected.party
             }
           },
           {
@@ -46,7 +52,7 @@
               text: "Address"
             },
             value: {
-              html: "72 Guild Street<br>London<br>SE23 6FH" or data['addressLine1']
+              html: selected.addressline1
             },
             actions: {
               items: [

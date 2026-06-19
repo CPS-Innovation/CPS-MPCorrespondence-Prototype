@@ -3,7 +3,7 @@
 
 
 {% block pageTitle %}
-  Add basic details - {{ serviceName }}
+Create new record - {{ serviceName }}
 {% endblock %}
 
 {% block containerStart %}
@@ -90,7 +90,7 @@
   }
 }) }}
 
-{{ govukCheckboxes({
+{{ govukRadios({
   name: "isVRR",
   fieldset: {
     legend: {
@@ -103,6 +103,10 @@
     {
       value: "yes",
       text: "Yes"
+    },
+    {
+      value: "no",
+      text: "No"
     }
   ]
 }) }}

@@ -9,6 +9,8 @@ const router = govukPrototypeKit.requests.setupRouter()
 // Add your routes here
 // Logging session data 
 
+const mp_data = require('./data/mps.json')
+
 
  
 router.use((req, res, next) => { 
@@ -17,7 +19,8 @@ router.use((req, res, next) => {
     url: req.originalUrl, 
     data: req.session.data 
     } 
-    console.log(JSON.stringify(log, null, 2)) 
+    console.log(JSON.stringify(log, null, 2))
+    res.locals.mps = mp_data
    
     next() 
     })

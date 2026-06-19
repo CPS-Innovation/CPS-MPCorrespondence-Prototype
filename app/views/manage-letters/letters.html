@@ -1,7 +1,7 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+  Letters for record QC 79.2026 – {{ serviceName }} – GOV.UK Prototype Kit
 {% endblock %}
 
 {% block containerStart %}
@@ -20,7 +20,37 @@
         Letters
       </h1>
 
-      <form class="form" action="/path/of/next/page" method="post">
+      <form class="form" action="/manage-letters/add-new-letter" method="post">
+
+        {% if data.success-record == "yes" %}
+        {{ govukPanel({
+          titleText: "Record created",
+          html: "Reference number is <strong>QC 79.2026</strong>",
+          classes: "govuk-!-margin-bottom-3"
+        }) }}
+
+        {% endif %}
+
+        {% if data.success == "yes" %}
+
+        {% call govukNotificationBanner({
+          type: "success"
+        }) %}
+          <h3 class="govuk-notification-banner__heading">
+            Letter successfully added
+          </h3>
+        {% endcall %}
+
+        {% endif %}
+
+        {{ govukButton({
+          text: "Add new letter",
+          classes: "govuk-button--secondary"
+        }) }}
+
+        </form>
+
+
 
         {{ govukSummaryList({
           card: {
@@ -86,13 +116,7 @@
             }
           ]
         }) }}
-        
 
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-
-      </form>
 
     </div>
   </div>

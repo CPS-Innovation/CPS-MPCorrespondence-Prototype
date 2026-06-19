@@ -1,0 +1,240 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Create new record – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <h1 class="govuk-heading-xl">
+        Check your answers before creating the record
+      </h1>
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "Basic details"
+          },
+          actions: {
+            items: [
+              {
+                href: "#",
+                text: "Change",
+                visuallyHiddenText: "basic details of the record"
+              }
+            ]
+          }
+        },
+        rows: [
+          {
+            key: {
+              text: "CPS area"
+            },
+            value: {
+              text: data['which-cps-area']
+            }
+          },
+          {
+            key: {
+              text: "National case"
+            },
+            value: {
+              text: data['isNational']
+            }
+          },
+          {
+            key: {
+              text: "CMS case"
+            },
+            value: {
+              text: data['isCMS']
+            }
+          },
+          {
+            key: {
+              text: "Civil claim"
+            },
+            value: {
+              text: data['isCivilClaim']
+            }
+          },
+          {
+            key: {
+              text: "Topic"
+            },
+            value: {
+              text: data['record-topic']
+            }
+          }
+        ]
+      }) }}
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "CMS case details"
+          },
+          actions: {
+            items: [
+              {
+                href: "#",
+                text: "Change",
+                visuallyHiddenText: "basic details of the record"
+              }
+            ]
+          }
+        },
+        rows: [
+          {
+            key: {
+              text: "Case type"
+            },
+            value: {
+              text: data['which-case-type']
+            }
+          },
+          {
+            key: {
+              text: "URN"
+            },
+            value: {
+              text: data['record-urn']
+            }
+          },
+          {
+            key: {
+              text: "Victim's right to review case"
+            },
+            value: {
+              text: data['isVRR']
+            }
+          }
+        ]
+      }) }}
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "Representative details"
+          },
+          actions: {
+            items: [
+              {
+                href: "#",
+                text: "Change",
+                visuallyHiddenText: "representative details"
+              }
+            ]
+          }
+        },
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: data['which-cps-area']
+            }
+          },
+          {
+            key: {
+              text: "Party affiliation"
+            },
+            value: {
+              text: data['isNational']
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              text: data['isCMS']
+            }
+          }
+        ]
+      }) }}
+
+
+{% if data['isConstituent'] == "yes" %}
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "Constituent details"
+          },
+          actions: {
+            items: [
+              {
+                href: "#",
+                text: "Change",
+                visuallyHiddenText: "constituent details"
+              }
+            ]
+          }
+        },
+        rows: [
+          {
+            key: {
+              text: "First name"
+            },
+            value: {
+              text: data['constituent-firstName']
+            }
+          },
+          {
+            key: {
+              text: "Last name"
+            },
+            value: {
+              text: data['constituent-surname']
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              text: data['constituent-addressLine1']
+            }
+          },
+          {
+            key: {
+              text: "Email address"
+            },
+            value: {
+              text: data['constituent-email']
+            }
+          },
+          {
+            key: {
+              text: "Phone number"
+            },
+            value: {
+              text: data['constituent-phone']
+            }
+          }
+        ]
+      }) }}
+    {% endif %}
+
+      <form action="/manage-letters/letters?success-record=yes" method="post" novalidate>
+
+        {{ govukButton({
+          text: "Confirm and create"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

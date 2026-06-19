@@ -7,13 +7,20 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    {% include "govuk-prototype-kit/includes/homepage-top.njk" %}
+    {{ govukWarningText({
+      text: "This prototype is a work in progress, is incomplete and parts may be broken. Currently only adding new letters and records is available. There is no validation yet.",
+      iconFallbackText: "Warning"
+    }) }}
 
-    <p class="govuk-body">
-      <a href="/create-new-record" class="govuk-link govuk-link--no-visited-state">Create a new MP record</a>
-    </p>
+    <h1 class="govuk-heading-l">Journeys available</h1>
+
+    <ul class="govuk-list">
+      <li><a href="/create-new-record" class="govuk-link govuk-link--no-visited-state">Create a new MP record</a></li>
+      <li><a href="/manage-letters/letters" class="govuk-link govuk-link--no-visited-state">View letters</a></li>
+    </ul>
 
   </div>
 </div>
 
 {% endblock %}
+

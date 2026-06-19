@@ -10,15 +10,25 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
     <div class="govuk-header">
       <div class="govuk-header__container govuk-width-container">
         <div class="govuk-header__logo">
-          <a href="#" class="govuk-header__homepage-link">
-            <div class="govuk-header__logotype govuk-!-font-weight-bold">
+          <a href="/" class="govuk-header__homepage-link">
+            <span class="govuk-header__logotype govuk-!-font-weight-bold">
             CPS
-            </div>
+            </span>
+            <span data-expression="" class="govuk-header__logotype"> MP Correspondence</span>
           </a>
         </div>
       </div>
     </div>
   </header>
+
+{{ govukPhaseBanner({
+  tag: {
+    text: "Prototype",
+    classes: "govuk-tag--yellow"
+  },
+  html: 'This a work in progress prototype. It is not a real service.'
+}) }}
+
 {% endblock %}
 
 {% block scripts %}
@@ -34,5 +44,6 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
   {{ super() }}
 
   <link href="/public/css/accessible-autocomplete.min.css" rel="stylesheet" type="text/css" />
+  <link href="/public/css/cps.css" rel="stylesheet" type="text/css" />
 
 {% endblock %}

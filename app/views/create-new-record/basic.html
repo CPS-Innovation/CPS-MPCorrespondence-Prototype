@@ -3,7 +3,7 @@
 
 
 {% block pageTitle %}
-  Add basic details - {{ serviceName }}
+Create new record - {{ serviceName }}
 {% endblock %}
 
 {% block containerStart %}
@@ -43,20 +43,20 @@
   },
     {
       text: "HQ DID",
-      value: "did"
+      value: "HQ Digital and Information"
     },
     {
       text: "West Midlands",
-      value: "wm"
+      value: "West Midlands"
     },
     {
       text: "Yorkshire and Humber",
-      value: "yorks"
+      value: "Yorkshire and Humber"
     }
   ]
 }) }} 
 
-{{ govukCheckboxes({
+{{ govukRadios({
   name: "isNational",
   fieldset: {
     legend: {
@@ -70,13 +70,17 @@
   },
   items: [
     {
-      value: "yes",
+      value: "Yes",
       text: "Yes"
+    },
+    {
+      value: "No",
+      text: "No"
     }
   ]
 }) }}
 
-{{ govukCheckboxes({
+{{ govukRadios ({
   name: "isCMS",
   fieldset: {
     legend: {
@@ -87,13 +91,17 @@
   },
   items: [
     {
-      value: "yes",
+      value: "Yes",
       text: "Yes"
+    },
+    {
+      value: "No",
+      text: "No"
     }
   ]
 }) }}
 
-{{ govukCheckboxes({
+{{ govukRadios({
   name: "isCivilClaim",
   fieldset: {
     legend: {
@@ -104,8 +112,12 @@
   },
   items: [
     {
-      value: "yes",
+      value: "Yes",
       text: "Yes"
+    },
+    {
+      value: "No",
+      text: "No"
     }
   ]
 }) }}

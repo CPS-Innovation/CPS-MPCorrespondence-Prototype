@@ -3,7 +3,7 @@
 
 
 {% block pageTitle %}
-  Add basic details - {{ serviceName }}
+Create new record - {{ serviceName }}
 {% endblock %}
 
 {% block containerStart %}
@@ -27,14 +27,18 @@
         <label for="choose-mp">Who is the representative that sent the letter?</label>
       </h1>
 
-      <div>
-      <select class="govuk-select" name="choose-mp" id="choose-mp">
+      <div id="choose-mp=hint" class="govuk-hint">
+        Search and select their name
+      </div>
+
+      <div class="govuk-fieldset govuk-!-margin-bottom-3">
+      <select class="govuk-select" name="selected-mp" id="choose-mp">
         <option></option>
-        <option value = "mp:keir-starmer">Keir Starmer (Labour)</option>
-        <option value = "mp:kemi-badenoch">Kemi Badenoch (Conservative)</option>
-        <option value = "mp:ed-davey">Ed Davey (Liberal Democrat)</option>
-        <option value = "mp:nigel-farage">Nigel Farage (Reform UK)</option>
-        <option value = "mp:sian-berry">Siân Berry (Green)</option>
+        <option value = "1">Keir Starmer (Labour)</option>
+        <option value = "2">Kemi Badenoch (Conservative)</option>
+        <option value = "2">Ed Davey (Liberal Democrat)</option>
+        <option value = "2">Nigel Farage (Reform UK)</option>
+        <option value = "2">Siân Berry (Green)</option>
       </select>
       </div>
 

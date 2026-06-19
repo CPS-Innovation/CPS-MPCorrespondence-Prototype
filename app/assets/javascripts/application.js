@@ -3,19 +3,29 @@
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
 //
 
-window.GOVUKPrototypeKit.documentReady(() => {
-  // Add JavaScript here
 
-  // Autocomplete select
+function initialiseAutoComplete (autocompleteSelector) {
+  let element = document.querySelector(autocompleteSelector)
+  if(element) {
 
-  let selectElement = document.querySelector('#choose-mp')
- 
-  accessibleAutocomplete.enhanceSelectElement({
+    accessibleAutocomplete.enhanceSelectElement({
 
     defaultValue: '',
 
-    selectElement: selectElement
+    selectElement: element
 
   })
+}
+}
+
+window.GOVUKPrototypeKit.documentReady(() => {
+  // Add JavaScript here
+
+  // Autocomplete selects
+
+  // choose MP
+
+  initialiseAutoComplete('#choose-mp');
+  initialiseAutoComplete('#signatory-name');
 
 })

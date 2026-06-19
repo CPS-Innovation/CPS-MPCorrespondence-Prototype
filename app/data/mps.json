@@ -1,0 +1,16 @@
+{
+    "1": {
+        "name": "Keir Starmer",
+        "party": "Labour",
+        "addressLine1": "28 Test Lane",
+        "city": "Testcity",
+        "postcode":"TS1 1AV"
+    },
+    "2": {
+        "name": "Kemi Badenoch",
+        "party": "Conservative",
+        "addressLine1": "28 Test Street West",
+        "city": "Testcity",
+        "postcode":"TS1 2BC"
+    }
+}

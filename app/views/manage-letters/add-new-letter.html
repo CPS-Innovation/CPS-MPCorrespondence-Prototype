@@ -1,0 +1,114 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Add new letter – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Add new letter
+      </h1>
+
+      <form class="form" action="/manage-letters/letters?success=yes" method="post">
+
+        {{ govukSelect({
+          label: {
+            text: "What is letter receipt type?",
+            isPageHeading: false
+            },
+          id: "letter-receipt-type",
+          name: "letter-receipt-type",
+          items: [
+          {
+            value: "choose",
+            text: "Choose receipt type",
+            selected: true
+          },
+            {
+              text: "MP",
+              value: "MP"
+            },
+            {
+              text: "Lord or peer",
+              value: "Lord"
+            },
+            {
+              text: "Member of the Scottish Parliament",
+              value: "MSP"
+            },
+            {
+              text: "Member of the Welsh Senedd",
+              value: "MS"
+            },
+            {
+              text: "Other",
+              value: "Other"
+            }
+        
+          ]
+        }) }} 
+
+        {{ mojDatePicker({
+          id: "date-letter",
+          name: "date-letter",
+          label: {
+            text: "Date of letter"
+          },
+          hint: {
+            text: "For example, 17/5/2024"
+          }
+        }) }}
+
+        {{ mojDatePicker({
+          id: "date-received",
+          name: "date-received",
+          label: {
+            text: "Date letter received"
+          },
+          hint: {
+            text: "For example, 17/5/2024"
+          }
+        }) }}
+
+        
+        {{ mojDatePicker({
+          id: "date-acknowledgement",
+          name: "date-acknowledgement",
+          label: {
+            text: "Date letter acknowledged (optional)"
+          },
+          hint: {
+            text: "For example, 17/5/2024"
+          }
+        }) }}
+
+        {{ govukButton({
+          text: "Save",
+          classes: "govuk-button"
+        }) }}
+
+        {{ govukButton({
+          text: "Record signatory",
+          classes: "govuk-button--secondary",
+          href: "/manage-letters/confirm-signatory"
+        }) }}
+
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}
