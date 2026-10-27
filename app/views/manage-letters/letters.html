@@ -1,26 +1,77 @@
-{% extends "layouts/main.html" %}
+{% set months = [
+  '',
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+] %}
 
-{% block pageTitle %}
-  Letters for record QC 79.2026 – {{ serviceName }} – GOV.UK Prototype Kit
-{% endblock %}
+{% if data['data-draft'] %}
+{% set datedraftparts = data['date-draft'].split('/') %}
+{% set formattedDate =
+  (datedraftparts[0] | int) + ' ' +
+  months[datedraftparts[1] | int] + ' ' +
+  datedraftparts[2]
+%}
+{% else %}
+{% set formattedDate = "" %}
+{% endif %}
 
-{% block containerStart %}
-  {{ govukBackLink({
-    text: "Back",
-    href: "javascript:window.history.back()"
-  }) }}
-{% endblock %}
 
-{% block content %}
+{% if data['data-draft-received'] %}
+{% set datereceivedparts = data['date-draft-received'].split('/') %}
+{% set formattedDateR =
+  (datereceivedparts[0] | int) + ' ' +
+  months[datereceivedparts[1] | int] + ' ' +
+  datereceivedparts[2]
+%}
+{% else %}
+{% set formattedDate = "" %}
+{% endif %}
 
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+{% if not data['date-draft-received'] %}
 
-      <h1 class="govuk-heading-l">
-        Letters
-      </h1>
+  {% set draftRow = {
+    key: {
+      text: "Draft due"
+    },
+    value: {
+      html: (formattedDate or "1 May 2026")
+    },
+    actions: {
+      items: [{
+        href: "/manage-letters/edit/draft-due-date",
+        text: "Update"
+      }]
+    }
+  } %}
 
-      <form class="form" action="/manage-letters/add-new-letter" method="post">
+{% else %}
+
+  {% set draftRow = {
+    key: {
+      text: "Draft received"
+    },
+    value: {
+      text: formattedDateR
+    },
+    actions: {
+      items: [{
+        href: "/manage-letters/edit/draft-due-date-confirm",
+        text: "Change"
+      }]
+    }
+  } %}
+
+{% endif %}
 
         {% if data.success-record == "yes" %}
         {{ govukPanel({
@@ -31,7 +82,7 @@
 
         {% endif %}
 
-        {% if data.success == "yes" %}
+        {% if data['success'] == "yes" %}
 
         {% call govukNotificationBanner({
           type: "success"
@@ -43,82 +94,32 @@
 
         {% endif %}
 
-        {{ govukButton({
-          text: "Add new letter",
-          classes: "govuk-button--secondary"
-        }) }}
+        <h2 class="govuk-heading-m">
+          Letters
+        </h2>
 
-        </form>
-
-
-
-        {{ govukSummaryList({
-          card: {
-            title: {
-              text: "Letter of 1 May 2026"
-            }
-          },
-          rows: [
+        {{ govukTaskList({
+          idPrefix: "letters",
+          items: [
             {
-              key: {
-                text: "Date letter received"
+              title: {
+                text: "1 May 2026"
               },
-              value: {
-                text: "20 May 2026"
-              },
-              actions: {
-                items: [
-                  {
-                    href: "#",
-                    text: "Change",
-                    visuallyHiddenText: "age"
-                  }
-                ]
+              href: "view-letter",
+              status: {
+                text: "Overdue draft",
+                classes: "govuk-tag--orange"
               }
             },
             {
-              key: {
-                text: "Date acknowledgement sent"
+              title: {
+                text: "12 May 2026"
               },
-              value: {
-                html: "21 May 2026"
-              },
-              actions: {
-                items: [
-                  {
-                    href: "#",
-                    text: "Change",
-                    visuallyHiddenText: "nationality"
-                  }
-                ]
-              }
-            },
-            {
-              key: {
-                text: "Draft due"
-              },
-              value: {
-                html: "19 May 2026 <span class='govuk-tag govuk-tag--red'>Overdue</span>"
-              },
-              actions: {
-                items: [
-                  {
-                    href: "change-draft-due-date",
-                    text: "Change due date"
-                  },
-                  {
-                    href: "confirm-draft",
-                    text: "Confirm draft submitted",
-                    visuallyHiddenText: ""
-                  }
-                ]
+              href: "view-letter",
+              status: {
+                text: "Sent",
+                classes: "govuk-tag--primary"
               }
             }
           ]
         }) }}
-
-
-    </div>
-  </div>
-
-{% endblock %}

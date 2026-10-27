@@ -1,0 +1,50 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Are you sure you want to delete record QC H03 363.2026?
+      </h1>
+
+      {{ govukWarningText({
+        text: "This action cannot be reversed - if you are unsure, consider archiving instead.",
+        iconFallbackText: "Warning"
+      }) }}
+
+      <form class="form" action="/dashboard/home?confirmarchive=true" method="post">
+
+
+        <div class="govuk-button-group">
+
+          {{ govukButton({
+            text: "Cancel",
+            href: "view?subNav=basic"
+          }) }}
+
+        {{ govukButton({
+          text: "Confirm and delete",
+          classes: "govuk-button--warning"
+        }) }}
+      </div>
+
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

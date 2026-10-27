@@ -23,7 +23,7 @@ Create new record - {{ serviceName }}
 
         {% call govukFieldset({
           legend: {
-            text: "What is the representative's address?",
+            text: "What is the sender's address?",
             classes: "govuk-fieldset__legend--l",
             isPageHeading: true
           }
@@ -33,17 +33,18 @@ Create new record - {{ serviceName }}
             label: {
               text: "Address line 1"
             },
-            id: "address-line-1",
-            name: "addressLine1",
-            autocomplete: "off"
+            id: "mp-address-line-1",
+            name: "mp-addressLine1",
+            autocomplete: "off",
+            value: "A"
           }) }}
         
           {{ govukInput({
             label: {
               text: "Address line 2 (optional)"
             },
-            id: "address-line-2",
-            name: "addressLine2",
+            id: "mp-address-line-2",
+            name: "mp-addressLine2",
             autocomplete: "off"
           }) }}
         
@@ -52,9 +53,10 @@ Create new record - {{ serviceName }}
               text: "Town or city"
             },
             classes: "govuk-!-width-two-thirds",
-            id: "address-town",
-            name: "addressTown",
-            autocomplete: "off"
+            id: "mp-address-town",
+            name: "mp-addressTown",
+            autocomplete: "off",
+            value: mps[data['selected-mp']]['city']
           }) }}
         
           {{ govukInput({
@@ -62,8 +64,8 @@ Create new record - {{ serviceName }}
               text: "County (optional)"
             },
             classes: "govuk-!-width-two-thirds",
-            id: "address-county",
-            name: "addressCounty"
+            id: "mp-address-county",
+            name: "mp-addressCounty"
           }) }}
         
           {{ govukInput({
@@ -71,8 +73,8 @@ Create new record - {{ serviceName }}
               text: "Postcode"
             },
             classes: "govuk-input--width-10",
-            id: "address-postcode",
-            name: "addressPostcode",
+            id: "mp-address-postcode",
+            name: "mp-addressPostcode",
             autocomplete: "off"
           }) }}
         

@@ -2,6 +2,7 @@
 // For guidance on how to add JavaScript see:
 // https://prototype-kit.service.gov.uk/docs/adding-css-javascript-and-images
 //
+import "./accessible-autocomplete.min.js";
 
 
 function initialiseAutoComplete (autocompleteSelector) {
@@ -15,15 +16,16 @@ function initialiseAutoComplete (autocompleteSelector) {
     selectElement: element
 
   })
+
+  let newInput = document.querySelector(autocompleteSelector)
+  newInput.addEventListener('input', async (event ) => {
+    console.log(event, newInput.value)
+    await fetch(`/get-mp-data/${newInput.value}`)
+  })
 }
 }
 
 window.GOVUKPrototypeKit.documentReady(() => {
-  // Add JavaScript here
-
-  // Autocomplete selects
-
-  // choose MP
 
   initialiseAutoComplete('#choose-mp');
   initialiseAutoComplete('#signatory-name');

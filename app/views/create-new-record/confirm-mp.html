@@ -1,9 +1,6 @@
 {% extends "layouts/main.html" %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 
-{% set selected = mps[data.selected-mp] %}
-
-
 
 {% block pageTitle %}
 Create new record - {{ serviceName }}
@@ -18,14 +15,28 @@ Create new record - {{ serviceName }}
 
 {% block content %}
 
-{{ data[choose-mp] | dump }}
+{% set selectedMember = members|selectFromArray("memberId", data['selected-mp']|int) %}
+
+{% set selectedMember = selectedMember[0] %}
+
+{% set selectedMemberAddressHtml %}
+{{ selectedMember.address[0].line1 }}
+{% if selectedMember.address[0].line2 != "" %}
+<br>{{ selectedMember.address[0].line2 }}
+{% endif %}
+<br>{{ selectedMember.address[0].town }}
+{% if selectedMember.address[0].county != "" %}
+<br>{{ selectedMember.address[0].county }}
+{% endif %}
+<br>{{ selectedMember.address[0].postcode }}
+{% endset %}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
 
       <h1 class="govuk-heading-l">
-        Confirm the representative's details are correct
+        Confirm the sender's details
       </h1>
 
 
@@ -36,33 +47,67 @@ Create new record - {{ serviceName }}
               text: "Name"
             },
             value: {
-              text: ""
+              text: selectedMember.name
             }
           },
           {
             key: {
-              text: "Party affiliation"
+              text: "Party or group"
             },
             value: {
-              text: selected.party
+              text: selectedMember.party
             }
           },
+          {
+            key: {
+              text: "Role"
+            },
+            value: {
+              text: selectedMember.memberType
+            }
+          },
+          {
+            key: {
+              text: selectedMember.constituencyType
+            },
+            value: {
+              text: selectedMember.constituency
+            }
+          } if selectedMember.memberType != "Lord",
           {
             key: {
               text: "Address"
             },
             value: {
-              html: selected.addressline1
+              html: selectedMemberAddressHtml
             },
             actions: {
               items: [
                 {
-                  href: "/create-new-record/change-mp-address",
+                  href: "/create-new-record/select-address",
                   text: "Change",
                   visuallyHiddenText: "address"
                 }
               ]
-            }
+            },
+            classes:"govuk-summary-list__row--no-border"
+          },
+          {
+            key: {
+              text: "Email"
+            },
+            value: {
+              html: selectedMember.address[0].email
+            },
+            classes:"govuk-summary-list__row--no-border govuk-!-text-break-word"
+          } if selectedMember.address[0].email != "",
+          {
+            key: {
+              text: "Phone number"
+            },
+            value: {
+              text: selectedMember.address[0].phoneNumber
+            } if selectedMember.address[0].phoneNumber != ""
           }
         ]
       }) }}

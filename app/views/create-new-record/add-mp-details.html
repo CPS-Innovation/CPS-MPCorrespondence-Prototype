@@ -15,6 +15,7 @@ Create new record - {{ serviceName }}
 
 {% block content %}
 
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
@@ -22,28 +23,39 @@ Create new record - {{ serviceName }}
       <form class="form" action="/create-new-record/confirm-mp" method="post">
 
 
-      
+
       <h1 class="govuk-heading-l">
-        <label for="choose-mp">Who is the representative that sent the letter?</label>
+        <label for="choose-mp">Who sent the letter?</label>
       </h1>
 
       <div id="choose-mp=hint" class="govuk-hint">
         Search and select their name
       </div>
 
+
       <div class="govuk-fieldset govuk-!-margin-bottom-3">
       <select class="govuk-select" name="selected-mp" id="choose-mp">
         <option></option>
-        <option value = "1">Keir Starmer (Labour)</option>
-        <option value = "2">Kemi Badenoch (Conservative)</option>
-        <option value = "2">Ed Davey (Liberal Democrat)</option>
-        <option value = "2">Nigel Farage (Reform UK)</option>
-        <option value = "2">Siân Berry (Green)</option>
+
+        {% for member in members %}
+        <option value = "{{ member.memberId }}">{{ member.name }} ({{ member.party }})</option>
+        {% endfor %}
       </select>
+      </div>
+
+       <div class="govuk-!-margin-bottom-5">
+        {% if data['viewAs'] == "admin" %}
+        <a class="govuk-link" href="/admin/add-other-rep">I cannot find the sender</a>
+        {% elif data['viewAs'] == "user" %}
+        {% call govukInsetText() %}
+        Contact the Parliamentary Correspondence and Complaints team if you cannot find the sender.
+        {% endcall %}
+        {% endif %}
       </div>
 
         {{ govukButton({
           text: "Continue"
+
         }) }}
 
       </form>

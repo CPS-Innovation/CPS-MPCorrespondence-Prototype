@@ -1,7 +1,7 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  Create new record – {{ serviceName }} – GOV.UK Prototype Kit
+  Check your answers – {{ serviceName }}
 {% endblock %}
 
 {% block containerStart %}
@@ -77,6 +77,8 @@
           }
         ]
       }) }}
+      
+      {% if data['isCMS'] == "yes" %}
 
       {{ govukSummaryList({
         card: {
@@ -121,6 +123,8 @@
         ]
       }) }}
 
+    {% endif %}
+
       {{ govukSummaryList({
         card: {
           title: {
@@ -142,7 +146,7 @@
               text: "Name"
             },
             value: {
-              text: ""
+              text: data['mp-name'] or "Ed Davey"
             }
           },
           {
@@ -150,7 +154,7 @@
               text: "Party affiliation"
             },
             value: {
-              text: ""
+              text: data['mp-party'] or "Liberal Democrat"
             }
           },
           {
@@ -158,7 +162,7 @@
               text: "Address"
             },
             value: {
-              text: ""
+              html: "123 Test Street<br>Test Town<br>TS1 1AT"
             }
           }
         ]
@@ -227,7 +231,7 @@
       }) }}
     {% endif %}
 
-      <form action="/manage-letters/letters?success-record=yes" method="post" novalidate>
+      <form action="/view-record/view?subNav=letters" method="post" novalidate>
 
         {{ govukButton({
           text: "Confirm and create"

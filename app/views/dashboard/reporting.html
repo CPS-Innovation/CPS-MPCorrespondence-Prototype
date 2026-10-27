@@ -1,0 +1,261 @@
+{% extends "layouts/main.html" %}
+{% set currentNav = "reporting" %}
+
+{% block pageTitle %}
+  Reporting – {{ serviceName }}
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Reports
+      </h1>
+
+
+
+      <div class="app-filter-layout">
+        <div class="app-filter-layout__content">
+          <form action="reporting?filtered=true" method="post">
+          <div class="app-filter-layout__filter">
+        {{ mojDatePicker({
+          id: "filter-reporting-from",
+          name: "filter-reporting-from",
+          label: {
+            text: "Letter date from"
+          },
+          value:  data['filter-reporting-from'] if data['filtered']=="true" else ""
+        }) }}
+
+        {{ mojDatePicker({
+          id: "filter-reporting-to",
+          name: "filter-reporting-to",
+          label: {
+            text: "Letter date to"
+          },
+          value: data['filter-reporting-to'] if data['filtered']=="true" else ""
+        }) }}
+
+        </div>
+
+        <div class="govuk-button-group">
+        {{ govukButton({
+          text: "Filter"
+        })
+
+        }}
+        <a class="govuk-link" href="reporting?filtered=false">Clear filter</a>
+        </div>
+
+        </form>
+        </div>
+      </div>
+
+      {{ govukTable({
+        caption: "Deadline compliance by type",
+        captionClasses: "govuk-table__caption--m",
+        firstCellIsHeader: true,
+        head: [
+          {
+            text: "Type"
+          },
+          {
+            text: "Deadline met"
+          },
+          {
+            text: "Deadline not met"
+          },
+          {
+            text: "Total"
+          }
+        ],
+        rows: [
+          [
+            {
+              text: "National"
+            },
+            {
+              text: "10 (40.0%)" if data['filtered']=="true" else "34 (34.0%)"
+            },
+            {
+              text: "15 (60.0%)" if data['filtered']=="true" else "66 (66.0%)"
+            },
+            {
+              text: "25" if data['filtered']=="true" else "100"
+            }
+          ],
+          [
+            {
+              text: "Area only (in Cymru Wales, North West, HQ DID)"
+            },
+            {
+              text: "12 (66.6%)" if data['filtered']=="true" else "75 (50.0%)"
+            },
+            {
+              text: "6 (33.3%)" if data['filtered']=="true" else "75 (50.0%)" 
+            },
+            {
+              text: "18" if data['filtered']=="true" else "150"
+            }
+          ],
+          [
+            {
+              text: "National + your Areas"
+            },
+            {
+              text: "22 (51.2%)" if data['filtered']=="true" else "109 (43.6%)"
+            },
+            {
+              text: "21 (49.8%)" if data['filtered']=="true" else "141 (56.4%)"
+            },
+            {
+              text: "43" if data['filtered']=="true" else "250"
+            }
+          ]
+        ]
+      }) }}
+
+      {{ govukTable({
+        caption: "DPP/DG letters by CPS Area",
+        captionClasses: "govuk-table__caption--m",
+        firstCellIsHeader: true,
+        head: [
+          {
+            text: "CPS Area"
+          },
+          {
+            text: "Deadline met"
+          },
+          {
+            text: "Deadline not met"
+          },
+          {
+            text: "Total"
+          }
+        ],
+        rows: [
+          [
+            {
+              text: "National"
+            },
+            {
+              text: "10 (40.0%)" if data['filtered']=="true" else "34 (34.0%)"
+            },
+            {
+              text: "15 (60.0%)" if data['filtered']=="true" else "66 (66.0%)"
+            },
+            {
+              text: "25" if data['filtered']=="true" else "100"
+            }
+          ],
+          [
+            {
+              text: "Area only (in Cymru Wales, North West, HQ DID)"
+            },
+            {
+              text: "12 (66.6%)" if data['filtered']=="true" else "75 (50.0%)"
+            },
+            {
+              text: "6 (33.3%)" if data['filtered']=="true" else "75 (50.0%)" 
+            },
+            {
+              text: "18" if data['filtered']=="true" else "150"
+            }
+          ],
+          [
+            {
+              text: "National + your Areas"
+            },
+            {
+              text: "22 (51.2%)" if data['filtered']=="true" else "109 (43.6%)"
+            },
+            {
+              text: "21 (49.8%)" if data['filtered']=="true" else "141 (56.4%)"
+            },
+            {
+              text: "43" if data['filtered']=="true" else "250"
+            }
+          ]
+        ]
+      }) }}
+      <a class="govuk-link govuk-link--no-visited-state govuk-!-margin-bottom-3" href="#">Export DPP/DG letters data to Excel</a>
+
+      {{ govukTable({
+        caption: "Cabinet Office return (Areas and DDP/DG letters)",
+        captionClasses: "govuk-table__caption--m",
+        firstCellIsHeader: true,
+        head: [
+          {
+            text: "CPS Area"
+          },
+          {
+            text: "Deadline met"
+          },
+          {
+            text: "Deadline not met"
+          },
+          {
+            text: "Total"
+          }
+        ],
+        rows: [
+          [
+            {
+              text: "National"
+            },
+            {
+              text: "10 (40.0%)" if data['filtered']=="true" else "34 (34.0%)"
+            },
+            {
+              text: "15 (60.0%)" if data['filtered']=="true" else "66 (66.0%)"
+            },
+            {
+              text: "25" if data['filtered']=="true" else "100"
+            }
+          ],
+          [
+            {
+              text: "Area only (in Cymru Wales, North West, HQ DID)"
+            },
+            {
+              text: "12 (66.6%)" if data['filtered']=="true" else "75 (50.0%)"
+            },
+            {
+              text: "6 (33.3%)" if data['filtered']=="true" else "75 (50.0%)" 
+            },
+            {
+              text: "18" if data['filtered']=="true" else "150"
+            }
+          ],
+          [
+            {
+              text: "National + your Areas"
+            },
+            {
+              text: "22 (51.2%)" if data['filtered']=="true" else "109 (43.6%)"
+            },
+            {
+              text: "21 (49.8%)" if data['filtered']=="true" else "141 (56.4%)"
+            },
+            {
+              text: "43" if data['filtered']=="true" else "250"
+            }
+          ]
+        ]
+      }) }}
+      <a class="govuk-link govuk-link--no-visited-state govuk-!-margin-bottom-3" href="#">Export Cabinet Office return to Excel</a>
+
+
+    </div>
+  </div>
+
+{% endblock %}

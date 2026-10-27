@@ -1,14 +1,17 @@
 {
   "scripts": {
-    "dev": "govuk-prototype-kit dev",
+    "dev": "node app/scripts/getParlData.js && govuk-prototype-kit dev",
     "serve": "govuk-prototype-kit serve",
     "start": "govuk-prototype-kit start"
   },
   "dependencies": {
-    "@govuk-prototype-kit/common-templates": "3.0.0",
+    "@govuk-prototype-kit/common-templates": "3.0.1",
     "@govuk-prototype-kit/step-by-step": "3.0.0",
-    "@ministryofjustice/frontend": "^9.0.0",
-    "govuk-frontend": "6.1.0",
-    "govuk-prototype-kit": "13.20.1"
+    "@ministryofjustice/frontend": "11.1.0",
+    "@x-govuk/govuk-prototype-filters": "^2.2.1",
+    "govuk-frontend": "6.6.0",
+    "govuk-prototype-kit": "14.0.2",
+    "p-limit": "^7.3.3",
+    "xml-mapping": "^1.7.2"
   }
 }

@@ -1,0 +1,48 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Change receipt date for letter of 1 May 2026 - {{ serviceName }}
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        What date was the letter recieved?
+      </h1>
+
+      <form class="form" action="/view-record/view-letter" method="post">
+
+        {{ mojDatePicker({
+          id: "date-received",
+          name: "date-received",
+          label: {
+            text: "Date"
+          },
+          hint: {
+            text: "For example, 17/5/2024"
+          }
+        }) }}
+
+        {{ govukButton({
+          text: "Save and continue",
+          classes: "govuk-button"
+        }) }}
+
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

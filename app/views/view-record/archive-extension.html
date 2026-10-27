@@ -1,0 +1,53 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Archive record – {{ serviceName }} 
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" action="archive-confirm" method="post">
+
+        {{ govukRadios({
+          classes: "",
+          name: "isExtendPeriod",
+          hint: "This will extend the period from 5 years to 10 years, intended for cases of great importance. If you are unsure, confirm with the Head of Parliamentary Complaints.",
+          fieldset: {
+            legend: {
+              text: "Do you want to extend the retention period for this record?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          items: [
+            {
+              value: "yes",
+              text: "Yes"
+            },
+            {
+              value: "no",
+              text: "No"
+            }
+          ]
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

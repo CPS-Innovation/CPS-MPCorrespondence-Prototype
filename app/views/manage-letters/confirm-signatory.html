@@ -1,7 +1,7 @@
 {% extends "layouts/main.html" %}
 
 {% block pageTitle %}
-  Add new letter – {{ serviceName }} – GOV.UK Prototype Kit
+  Add signatory – {{ serviceName }}
 {% endblock %}
 
 {% block containerStart %}
@@ -15,8 +15,8 @@
 
 {% set otherPersonInputHtml %}
 {{ govukInput({
-  id: "other-person-input",
-  name: "other-person-input",
+  id: "signatory-name",
+  name: "signatory-name",
   type: "text",
   autocomplete: "off",
   spellcheck: false,
@@ -27,8 +27,8 @@
 {% endset -%}
 
 {% set findPersonHtml %}
-<label class="govuk-label">
-  Signatory
+<label class="govuk-label" for="signatory-name">
+  Signatory name
 </label>
 
 <div class="govuk-fieldset govuk-!-margin-bottom-3">
@@ -48,51 +48,26 @@
     <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-l">
-        Who is signing the reply to this letter?
+        Who is signing the reply?
       </h1>
 
-      <form class="form" action="/manage-letters/add-new-letter" method="post">
+      <form class="form" action="/view-record/view-letter" method="post">
 
     
 
-        {{ govukRadios({
-          name: "signatoryOtherRadio",
-          items: [
-            {
-              value: "no",
-              text: "a CPS employee",
-              conditional: {
-                html: findPersonHtml
-              }
-            },
-
-            {
-              divider: "or"
-            },
-            {
-              value: "yes",
-              text: "another person", 
-              hint: {
-                text: "for example, they do not work for the CPS or do not appear in the employee directory"
-              },
-                conditional : {
-                html: otherPersonInputHtml
-              }
-            }
-          ]
-        }) }}
+        {{ findPersonHtml | safe }}
 
         {{ govukSelect({
           label: {
             text: "Signatory role",
             isPageHeading: false
             },
-          id: "letter-receipt-type",
-          name: "letter-receipt-type",
+          id: "signatory-role",
+          name: "signatoryRole",
           items: [
           {
             value: "choose",
-            text: "Choose receipt type",
+            text: "Choose signatory's role",
             selected: true
           },
             {

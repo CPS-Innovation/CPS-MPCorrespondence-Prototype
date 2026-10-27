@@ -1,0 +1,47 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Question page template – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+{% set ccPageHeading %}
+What is the cost centre code for {{ data.selectedArea | safe  }}?
+{% endset %}
+
+{% set ccId  = "costcentre-"+data.selectedArea %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <form class="form" action="/admin/cost-centre-codes" method="post">
+
+        {{ govukInput({
+          label: {
+            text: ccPageHeading, 
+            classes: "govuk-label--l",
+            isPageHeading: true
+          },
+          id: ccId,
+          name: ccId
+        }) }}
+
+        {{ govukButton({
+          text: "Continue"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,368 @@
+{% extends "layouts/main.html" %}
+{% if data['overrideQC'] %}
+  {% set pageHeading = 'Record '+ data['overrideQC'] %}
+{% else  %}
+  {% set pageHeading = 'Record QC H03 363.2026' %}
+{% endif %}
+
+{% if data['viewAs'] == "admin" %}
+{% set pageActions = [{
+  text: "Add new letter",
+  href: "/manage-letters/add-new-letter"
+}, {
+  text: "Archive",
+  href: "archive-extension",
+  classes: "govuk-button--secondary"
+}, {
+  text: "Delete",
+  href: "delete-confirm",
+  classes: "govuk-button--warning"
+}] %}
+{% else  %}
+{% set pageActions = [{
+    text: "Add new letter",
+    href: "/manage-letters/add-new-letter"
+  }] %}
+{% endif %}
+
+{% block pageTitle %}
+  View record – {{ serviceName }}
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+
+  {{ mojPageHeaderActions({
+    heading: {
+      text: pageHeading
+    },
+    items: pageActions
+  }) }}
+
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "Basic details"
+          }
+        },
+        rows: [
+          {
+            key: {
+              text: "QC number"
+            },
+            value: {
+              text: data['overrideQC'] or "QC H03 363.2026"
+            },
+            actions: {
+              items: [
+                {
+                  href: "override-qc-number",
+                  text: "Override",
+                  visuallyHiddenText: "QC number"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "CPS area"
+            },
+            value: {
+              text: data['which-cps-area']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/create-new-record/basic",
+                  text: "Change",
+                  visuallyHiddenText: "CPS Area"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "National case"
+            },
+            value: {
+              text: data['isNational']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/create-new-record/basic",
+                  text: "Change",
+                  visuallyHiddenText: "basic details of the record"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "CMS case"
+            },
+            value: {
+              text: data['isCMS']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/create-new-record/basic",
+                  text: "Change",
+                  visuallyHiddenText: " whether there a CMS record"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Civil claim"
+            },
+            value: {
+              text: data['isCivilClaim']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/create-new-record/basic",
+                  text: "Change",
+                  visuallyHiddenText: " whether civil claim"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Topic"
+            },
+            value: {
+              text: data['record-topic']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/create-new-record/basic",
+                  text: "Change",
+                  visuallyHiddenText: "topic"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Notes"
+            },
+            value: {
+              text: data['record-notes']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/create-new-record/basic",
+                  text: "Change",
+                  visuallyHiddenText: "notes"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+      {% if data['isCMS'] == "yes" %}
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "CMS case details"
+          }
+        },
+        rows: [
+          {
+            key: {
+              text: "Case type"
+            },
+            value: {
+              text: data['which-case-type']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/create-new-record/add-cms-details",
+                  text: "Change",
+                  visuallyHiddenText: "what case type"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "URN"
+            },
+            value: {
+              text: data['record-urn']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/create-new-record/add-cms-details",
+                  text: "Change",
+                  visuallyHiddenText: "URN"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Victim's right to review case"
+            },
+            value: {
+              text: data['isVRR']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/create-new-record/add-cms-details",
+                  text: "Change",
+                  visuallyHiddenText: "whether VRR"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+    {% endif %}
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "Representative details"
+          }
+        },
+        rows: [
+          {
+            key: {
+              text: "Name"
+            },
+            value: {
+              text: "Ed Davey"
+            },
+            classes: "govuk-summary-list__row--no-border",
+            actions: {
+              items: [
+                {
+                  href: "/create-new-record/add-mp-details",
+                  text: "Change",
+                  visuallyHiddenText: "representative details"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Party affiliation"
+            },
+            value: {
+              text: "Liberal Democrat"
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              html: "123 Test Street<br>Test Town<br>TS1 1AT"
+            },
+            actions: {
+              items: [
+                {
+                  href: "/create-new-record/change-mp-address",
+                  text: "Change",
+                  visuallyHiddenText: "representative's address"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+
+{% if data['isConstituent'] == "yes" %}
+
+      {{ govukSummaryList({
+        card: {
+          title: {
+            text: "Constituent details"
+          },
+          actions: {
+            items: [
+              {
+                href: "#",
+                text: "Change",
+                visuallyHiddenText: "constituent details"
+              }
+            ]
+          }
+        },
+        rows: [
+          {
+            key: {
+              text: "First name"
+            },
+            value: {
+              text: data['constituent-firstName']
+            }
+          },
+          {
+            key: {
+              text: "Last name"
+            },
+            value: {
+              text: data['constituent-surname']
+            }
+          },
+          {
+            key: {
+              text: "Address"
+            },
+            value: {
+              text: data['constituent-addressLine1']
+            }
+          },
+          {
+            key: {
+              text: "Email address"
+            },
+            value: {
+              text: data['constituent-email']
+            }
+          },
+          {
+            key: {
+              text: "Phone number"
+            },
+            value: {
+              text: data['constituent-phone']
+            }
+          }
+        ]
+      }) }}
+    {% endif %}
+
+    {% include "manage-letters/letters.html" %}
+
+
+    </div>
+  </div>
+{% endblock %}
