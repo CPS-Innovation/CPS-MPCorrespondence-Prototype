@@ -1,0 +1,247 @@
+{% extends "layouts/main.html" %}
+{% set currentNav = "home" %}
+{% block pageTitle %}
+Dashboard – {{ serviceName }}
+{% endblock %}
+
+{% block containerStart %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full-width">
+
+    <h1 class="govuk-heading-l">Records</h1>
+
+    <div class="govuk-button-group">
+      {{
+          govukButton({
+            text: "Create record",
+            href: "/create-new-record/basic"
+          })
+        }}
+    </div>
+
+
+    <div class="app-filter-layout">
+      <div class="app-filter-layout__filter"></div>
+      <div class="app-filter-layout__content">
+        <div class="app-action-bar">
+          <div class="app-action-bar__filter"></div>
+            <div class="app-filter">
+            <div class="app-filter__header">
+              Selected filters
+            </div>
+            <div class="app-filter__content">
+              <div class="govuk-form-group">
+
+                <fieldset class="govuk-fieldset">
+
+                  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+
+                    Record type
+
+                  </legend>
+
+
+                  <div class="govuk-radios govuk-radios--small" data-module="govuk-radios"
+                    data-govuk-radios-init="">
+
+
+                    </div>
+
+
+
+
+
+                  </div>
+
+                </fieldset>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <search class="app-search-form" id="app-record-search">
+          <form>
+            {{ govukInput({
+                id: "recordSearch[keywords]",
+                name: "recordSearch[keywords]",
+                label: {
+                  text: "Search by URN, reference number, address details, or MP name",
+                  classes: "govuk-label--s app-search-form__label"
+                },
+                value: data.caseSearch.keywords
+              }) }}
+
+            {{ govukButton({
+                text: "Search",
+                classes: "app-search-form__button"
+              }) }}
+          </form>
+
+          {% if data.caseSearch.keywords %}
+          <p class="govuk-!-margin-top-2 govuk-!-margin-bottom-0"><a class="govuk-link--no-visited-state"
+              href="?clearSearch=true">Clear search</a></p>
+          {% endif %}
+
+        </search>
+        <div class="app-list" id="app-case-list">
+          <div class="app-list__item">
+            {% set labelHtml %}
+            &nbsp;
+            <span class="govuk-visually-hidden">
+              QC 109.2026
+            </span>
+            {% endset %}
+            <div class="app-list__content">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <div>
+                  <a href="/view-record/view" class="govuk-link--no-visited-state">
+                    QC 109.2026
+                  </a>
+                </div>
+              </h2>
+
+              {{ govukSummaryList({
+                      classes: 'govuk-summary-list--no-border app-summary-list--compact app-summary-list--small-text',
+                      rows: [
+                        {
+                          key: {
+                            text: "Representative"
+                          },
+                          value: {
+                            text: "Andy Burnham"
+                          }
+                        },
+                        {
+                          key: {
+                            text: "Created by"
+                          },
+                          value: {
+                            text: "Luke Nash"
+                          }
+                        }
+                      ]
+                    }) }}
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <div>
+                  <a href="/view-record/view" class="govuk-link--no-visited-state">
+                    QC 105.2026
+                  </a>
+                </div>
+              </h2>
+
+              {{ govukSummaryList({
+                        classes: 'govuk-summary-list--no-border app-summary-list--compact app-summary-list--small-text',
+                        rows: [
+                          {
+                            key: {
+                              text: "Representative"
+                            },
+                            value: {
+                              text: "Andy Burnham"
+                            }
+                          },
+                          {
+                            key: {
+                              text: "Created by"
+                            },
+                            value: {
+                              text: "Luke Nash"
+                            }
+                          }
+                        ]
+                      }) }}
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <div>
+                  <a href="/view-record/view" class="govuk-link--no-visited-state">
+                    QC 108.2026
+                  </a>
+                </div>
+              </h2>
+
+              {{ govukSummaryList({
+                          classes: 'govuk-summary-list--no-border app-summary-list--compact app-summary-list--small-text',
+                          rows: [
+                            {
+                              key: {
+                                text: "Representative"
+                              },
+                              value: {
+                                text: "Ed Miliband"
+                              }
+                            },
+                            {
+                              key: {
+                                text: "Created by"
+                              },
+                              value: {
+                                text: "Rob Jenkins"
+                              }
+                            }
+                          ]
+                        }) }} <h2 class="govuk-heading-s govuk-!-margin-bottom-1">
+                <div>
+                  <a href="/view-record/view" class="govuk-link--no-visited-state">
+                    QC 107.2026
+                  </a>
+                </div>
+              </h2>
+
+              {{ govukSummaryList({
+                            classes: 'govuk-summary-list--no-border app-summary-list--compact app-summary-list--small-text',
+                            rows: [
+                              {
+                                key: {
+                                  text: "Created by"
+                                },
+                                value: {
+                                  text: "John Smith"
+                                }
+                              }
+                            ]
+                          }) }}
+
+            </div>
+          </div>
+        </div>
+
+        </search>
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+  new App.FilterToggleButton({
+    bigModeMediaQuery: '(min-width: 48.063em)',
+    startHidden: false,
+    toggleButton: {
+      container: $('.app-action-bar__filter'),
+      showText: 'Show filter',
+      hideText: 'Hide filter',
+      classes: 'govuk-button--secondary govuk-!-margin-bottom-3',
+    },
+    closeButton: {
+      container: $('.app-filter__header-action'),
+      text: 'Close',
+    },
+    filter: {
+      container: $('.app-filter-layout__filter'),
+    },
+  })
+
+</script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Override QC number – {{ serviceName }}
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <form class="form" action="view?subNav=basic" method="post">
+
+        {{ govukInput({
+          label: {
+            text: "What is the new QC number for this record?",
+            classes: "govuk-label--l",
+            isPageHeading: true
+          },
+          id: "overrideQC",
+          name: "overrideQC"
+        }) }}
+
+        {{ govukButton({
+          text: "Confirm and change"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,8 +1,3 @@
-{#
-For guidance on how to use layouts see:
-https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
-#}
-
 {% extends "govuk-prototype-kit/layouts/govuk-branded.njk" %}
 
 {% block header %}
@@ -21,6 +16,34 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
     </div>
   </header>
 
+{{ govukServiceNavigation({
+  navigation: [
+    {
+      href: "/dashboard/home",
+      text: "Records",
+      active: true if currentNav == "home" else false
+    },
+    {
+      href: "/dashboard/reporting",
+      text: "Reporting",
+      active: true if currentNav == "reporting" else false
+    },
+    {
+      href: "/admin",
+      text: "Admin",
+      active: true if currentNav == "admin" else false
+    },
+    {
+      href: "https://cpsprod1.service-now.com/sp?id=kb_category&kb_category=4d220b47db23a7008c8ce0a1ca961980&kb_id=ca6fed79dbd6ef00890f6dda4b9619f0",
+      text: "Guidance"
+    },
+    {
+      href: "#",
+      text: "Historic data"
+    }
+  ]
+}) }}
+
 {{ govukPhaseBanner({
   tag: {
     text: "Prototype",
@@ -30,6 +53,8 @@ https://prototype-kit.service.gov.uk/docs/how-to-use-layouts
 }) }}
 
 {% endblock %}
+
+
 
 {% block scripts %}
 

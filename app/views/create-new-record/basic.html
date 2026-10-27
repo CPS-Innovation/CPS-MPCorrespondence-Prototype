@@ -2,6 +2,12 @@
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 
 
+{ % set RadioCPSAreas = [{
+  value: "choose",
+  text: "Choose area",
+  selected: true
+}].concat(data["CPSAreasWithOptions"]) %}
+
 {% block pageTitle %}
 Create new record - {{ serviceName }}
 {% endblock %}
@@ -19,7 +25,7 @@ Create new record - {{ serviceName }}
     <div class="govuk-grid-column-two-thirds">
 
       <h1 class="govuk-heading-l">
-        Basic details
+        Case details
       </h1>
 
       <form class="form" action="/create-new-record/basic-answer" method="post">
@@ -35,25 +41,7 @@ Create new record - {{ serviceName }}
   },
   id: "which-cps-area",
   name: "which-cps-area",
-  items: [
-  {
-    value: "choose",
-    text: "Choose area",
-    selected: true
-  },
-    {
-      text: "HQ DID",
-      value: "HQ Digital and Information"
-    },
-    {
-      text: "West Midlands",
-      value: "West Midlands"
-    },
-    {
-      text: "Yorkshire and Humber",
-      value: "Yorkshire and Humber"
-    }
-  ]
+  items: data.CPSAreasWithOptions
 }) }} 
 
 {{ govukRadios({
@@ -122,18 +110,6 @@ Create new record - {{ serviceName }}
   ]
 }) }}
 
-{{ govukTextarea({
-  name: "record-note",
-  id: "record-note",
-  label: {
-    text: "Note",
-    classes: "govuk-label--m",
-    isPageHeading: false
-  },
-  hint: {
-    text: "Do not include personal, financial or sensitive information for data protection reasons"
-  }
-}) }}
 
 {{ govukInput({
   name: "record-topic",
@@ -144,7 +120,20 @@ Create new record - {{ serviceName }}
     isPageHeading: false
   },
   hint: {
-    text: "Do not include personal, financial or sensitive information for data protection reasons"
+    text: "Do not include personal, financial or sensitive information"
+  }
+}) }}
+
+{{ govukTextarea({
+  name: "record-note",
+  id: "record-note",
+  label: {
+    text: "Note",
+    classes: "govuk-label--m",
+    isPageHeading: false
+  },
+  hint: {
+    text: "Do not include personal, financial or sensitive information"
   }
 }) }}
 

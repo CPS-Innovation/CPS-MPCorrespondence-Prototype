@@ -1,0 +1,48 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Edit draft due date for letter 1 – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Confirm the draft has been received
+      </h1>
+
+      <form class="form" action="/view-record/view?subNav=letters" method="post">
+
+        {{ mojDatePicker({
+          id: "date-draft-received",
+          name: "date-draft-received",
+          label: {
+            text: "Date the draft was received"
+          },
+          hint: {
+            text: "For example, 17/5/2024"
+          }
+        }) }}
+
+        {{ govukButton({
+          text: "Save and confirm",
+          classes: "govuk-button"
+        }) }}
+
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

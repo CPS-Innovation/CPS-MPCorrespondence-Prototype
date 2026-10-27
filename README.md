@@ -8,4 +8,4 @@
  ## Get started
 
  1. Clone or spin up a codespace.
- 2. Run ``npm run dev``
+ 2. Run ``npm install`` (to install the requirements) and ``npm run dev``

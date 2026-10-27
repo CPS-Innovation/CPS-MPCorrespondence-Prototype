@@ -1,0 +1,72 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Add new letter – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+
+      <form class="form" action="/view-record/view-letter" method="post">
+
+        {{ govukRadios ({
+          fieldset: {
+            legend: {
+              text: "What is the letter's receipt type?",
+              isPageHeading: true,
+              classes: "govuk-fieldset__legend--l"
+            }
+          },
+          id: "letter-receipt-type",
+          name: "letter-receipt-type",
+          items: [
+            {
+              text: "MP",
+              value: "MP"
+            },
+            {
+              text: "Lord or peer",
+              value: "Lord"
+            },
+            {
+              text: "Member of the Scottish Parliament",
+              value: "MSP"
+            },
+            {
+              text: "Member of the Welsh Senedd",
+              value: "MS"
+            },
+            {
+              text: "Other",
+              value: "Other"
+            }
+        
+          ]
+        }) }} 
+
+
+
+
+        {{ govukButton({
+          text: "Save and continue",
+          classes: "govuk-button"
+        }) }}
+
+
+      </form>
+
+
+    </div>
+  </div>
+
+{% endblock %}

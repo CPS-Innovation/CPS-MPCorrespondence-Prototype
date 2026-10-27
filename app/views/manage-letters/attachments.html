@@ -1,0 +1,43 @@
+{% extends "layouts/main.html" %}
+
+{% block pageTitle %}
+  Add attachment – {{ serviceName }} 
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-l">
+        Add attachment
+      </h1>
+
+      <form class="form" action="/view-record/view?subNav=letters" method="post">
+
+        {{ govukFileUpload({
+          id: "attachment-upload",
+          name: "attachmentUpload",
+          label: {
+            text: "Upload a file"
+          },
+          javascript: true
+        }) }}
+
+        {{ govukButton({
+          text: "Add"
+        }) }}
+
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}

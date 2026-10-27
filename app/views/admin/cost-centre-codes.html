@@ -1,0 +1,54 @@
+{% extends "layouts/main.html" %}
+
+
+{% block pageTitle %}
+  Cost centre codes – {{ serviceName }}
+{% endblock %}
+
+{% block content %}
+
+
+{{ mojPageHeaderActions({
+  heading: {
+    text: "Cost centre codes"
+  },
+  items: [{
+    text: "Map new code",
+    href: "change-add-cost-centre"
+  }]
+}) }}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <div class="app-list" id="app-case-list">
+        {% for area in data.CPSAreas %}
+        <div class="app-list__item">
+          {% set labelHtml %}
+          &nbsp;
+          <span class="govuk-visually-hidden">
+           Open cost centre code for {{ area }}
+          </span>
+          {% endset %}
+          {% set itemLink %}
+          change-add-cost-centre?selectedArea={{ area }}
+          {% endset %}
+          <div class="app-list__content">
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">
+              <div>
+                <a href="{{ itemLink | safe }}" class="govuk-link--no-visited-state">
+                  {{ area }}
+                </a>
+              </div>
+            </h2>
+            </div>
+            {% else %}
+            No areas found.
+            {% endfor %}
+
+
+
+    </div>
+  </div>
+
+{% endblock %}

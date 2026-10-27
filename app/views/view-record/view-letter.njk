@@ -1,0 +1,151 @@
+{% extends "layouts/main.html" %}
+{% if data['signatory-name'][0] == '' %}
+{% set signatoryDetails = data['signatory-name'][0] + '<br>'+data['signatoryRole'] %}
+{% set signatoryActions = [{
+    href: "/manage-letters/confirm-signatory",
+    text: "Change",
+    visuallyHiddenText: "signatory"
+  }]
+   %}
+{% else  %}
+{% set signatoryDetails = '<a href="/manage-letters/confirm-signatory">Add signatory</a>' %}
+{% set signatoryActions = [] %}
+{% endif %}
+{% set isDeadlineMetText %}
+  {% if isDeadlineMet == "true" %}
+    The deadline has been <span class="govuk-!-font-weight-bold">met</span>.
+    {% else %}
+    The deadline has <span class="govuk-!-font-weight-bold">not been met</span>.
+    {% endif %}
+{% endset %}
+{% block pageTitle %}
+  View letter – {{ serviceName }}
+{% endblock %}
+
+{% block containerStart %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "javascript:window.history.back()"
+  }) }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+
+      <span class="govuk-caption-xl">Record {{  data['overrideQC'] or "QC H03 363.2026" }} </span>
+      <h1 class="govuk-heading-xl">
+        Letter of 1 May 2026
+      </h1>
+
+      {% call govukInsetText() %}
+        {{ isDeadlineMetText | safe }}
+      {% endcall %}
+
+
+
+      {{ govukSummaryList({
+        rows: [
+          {
+            key: {
+              text: "Receipt type"
+            },
+            value: {
+              text: data['letter-receipt-type']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/manage-letters/edit/edit-receipt-type",
+                  text: "Change",
+                  visuallyHiddenText: "receipt type"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Signatory"
+            },
+            value: {
+              html: signatoryDetails
+            },
+            actions: {
+              items: signatoryActions
+            }
+          },
+          {
+            key: {
+              text: "Area"
+            },
+            value: {
+              text: data['which-cps-area']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/create-new-record/basic",
+                  text: "Change",
+                  visuallyHiddenText: "Area"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Date received"
+            },
+            value: {
+              text: data['date-received']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/manage-letters/edit/receipt-date-change",
+                  text: "Change",
+                  visuallyHiddenText: " receipt date"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Date of letter"
+            },
+            value: {
+              text: data['date-letter']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/manage-letters/edit/date-letter-change",
+                  text: "Change",
+                  visuallyHiddenText: " date of letter"
+                }
+              ]
+            }
+          },
+          {
+            key: {
+              text: "Acknowledgment date"
+            },
+            value: {
+              text: data['date-acknowledgement']
+            },
+            actions: {
+              items: [
+                {
+                  href: "/manage-letters/edit/acknowlegment-date-change",
+                  text: "Change",
+                  visuallyHiddenText: " Acknowledgment date"
+                }
+              ]
+            }
+          }
+        ]
+      }) }}
+
+
+    </div>
+  </div>
+{% endblock %}
